@@ -64,10 +64,12 @@ img {
 
 * Repository: [https://github.com/kaesve/vue-training.git](https://github.com/kaesve/vue-training.git)
 * Documentation: [https://vuejs.org](https://vuejs.org)
+* Vue devtools: [https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en)
 * Cheatsheet: [https://vuejs-tips.github.io/cheatsheet/](https://vuejs-tips.github.io/cheatsheet/) [https://www.vuemastery.com/vue-cheat-sheet/](https://www.vuemastery.com/vue-cheat-sheet/)
 
-### Run
+### Other
 
+* node v8+
 * `npm install -g @vue/cli`
 
 </section>
