@@ -58,6 +58,15 @@ img {
 <main id="main" class="slide-container" markdown>
 
 <section class="slide" markdown>
+## Prep
+
+* Repository: [https://github.com/kaesve/vue-training.git](https://github.com/kaesve/vue-training.git)
+* Documentation: [https://vuejs.org](https://vuejs.org)
+* Cheatsheet: [https://vuejs-tips.github.io/cheatsheet/](https://vuejs-tips.github.io/cheatsheet/) [https://www.vuemastery.com/vue-cheat-sheet/](https://www.vuemastery.com/vue-cheat-sheet/)
+
+</section>
+
+<section class="slide" markdown>
 ## Roll Call
 
 Who's attending today?
@@ -402,64 +411,6 @@ const { name, age, jobTitle } = person;
 
 
 
-<section class="slide" markdown>
-
-## Components
-
-```js
-
-const PaintingSummary = {
-  props: [ 'painting' ],
-  template: `
-  `,
-  data() {
-    return { };
-  },
-  computed: {
-
-  },
-  methods: {
-    
-  }
-};
-
-```
-
-</section>
-
-
-<section class="slide" markdown>
-
-## Components
-
-```js
-
-const app = new Vue({
-  components: { PaintingSummary },
-  template: `
-  ...
-  <painting-summary :painting="painting" />
-  ...
-  `
-})
-
-```
-
-</section>
-
-
-
-<section class="slide" markdown>
-
-## Components
-
-```js
-
-
-
-```
-
-</section>
 
 <script>
 
