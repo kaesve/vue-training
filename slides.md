@@ -97,14 +97,27 @@ Who's attending today?
   <img src="static/vue-cli-contribution.png">
 </section>
 
-<section class="slide" markdown>
 
+<section class="slide" markdown>
 
 ## Why are we here?
 
-Vue 💯
+<p style="font-size: 40px; text-align: center">
+  Vue 💯
+<p>
 
 </section>
+
+
+<section class="slide" markdown>
+
+## Why even use a framework?
+
+* Solve common problems: Routing, state management, UI rendering
+* Conventions and consistency
+
+</section>
+
 
 <section class="slide">
   <img src="static/wired-evan-you-vs-google.png">
