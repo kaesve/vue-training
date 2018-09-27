@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Ken Voskuil (mail@kaesve.nl)" />
+  <title>VueJS intro course</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">VueJS intro course</h1>
+<p class="author">Ken Voskuil (mail@kaesve.nl)</p>
+</header>
+<div>
+<style>
+  figure {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  figure > :not(figcaption) {
+    margin: 20px !important;
+  }
+
+  figcaption {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  div.sourceCode {
+    background: #eee;
+    padding: 10px;
+  }
+
+  figure, img, code {
+    page-break-inside: avoid;
+  }
+</style>
+</div>
+<p>Vue is one of the cool new kids on the block in JavaScript land. Of course, you hear about new frameworks every week, but few of them garner as much traction. Vue is one of the most popular projects on github, and surveys show very high developer satisfaction.</p>
+<h2 id="goals">Goals</h2>
+<h2 id="what-is-vue-solving">What is Vue solving?</h2>
+<p>Vue is a front-end framework for developing web applications. What does this mean? What problems does it solve and what makes it worth using?</p>
+<p>Vue.js helps you build interactive web applications, by providing you a more powerful and easier to use toolset than the standard browser APIs. Its <em>reactive</em> system makes it easy to manage data, application and ui state, its components system makes it easy to reuse and compose code within and between projects and the templating system is also much easier to use than manipulating the DOM directly. But the main reason to choose for a framework like VueJS aren’t these conveniences, but rather for giving your team a shared <em>framework</em>.</p>
+<p>There is real value in following conventions and staying consistent within and across projects, and this becomes more true the bigger the team gets, the more code there is and the more people join and leave. Having a solution that everyone agrees with, understands and could maintain quickly becomes more important than using the best tool for the job. This is where frameworks shine, and where their value lies compared to self-built solutions or using separate libraries.</p>
+<h2 id="code-conventions">Code conventions</h2>
+<p>I’ve tried to keep the code examples in this workbook consistent in style. Most of the used conventions can be enumerated in a list:</p>
+<ul>
+<li>Two spaces for indenting</li>
+<li>Close each statement with a semi-colon</li>
+<li>camelCase variables and properties, PascalCase classes, kebab-case file names</li>
+</ul>
+<p>This workbook also uses ES5 and ES6 features extensively. If you are comfortable with lambda functions, destructuring and the likes, feel free to continue to the next section. If these words are foreign to you however, we will review the most important features here. Please take the time to get a good grip on these concepts, as they are the foundation for the rest of this workbook – and modern front-end development in general.</p>
+<h3 id="variable-declarations">Variable declarations</h3>
+<p>The brand new <code>let</code> and <code>const</code> keywords in JavaScript let you declare variables, just like <code>var</code>. The main difference is that variables declared with the new keywords have stricter scoping rules, that are more consistent with other main stream programming languages. Specifically, variable declarations aren’t ‘hoisted’ anymore, and are block scoped instead of function scoped. In this workbook, the convention is to use <code>const</code> where it makes sense, <code>let</code> when needed and <code>var</code> never.</p>
+<h3 id="object-literal-syntax">Object literal syntax</h3>
+<p>Several improvements to the object literal syntax have been introduced, and we will use two of them extensively: Object Methods and XXX. Below follow examples of both, with the new syntax on the left, and the identical object in ES5 syntax to the right. The left and right code samples do exactly the same thing, but the new syntax is much more compact.</p>
+<figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">const</span> myObject <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="at">someMethod</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="co">// method body goes here</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="op">};</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">const</span> myObject <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">someMethod</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="co">// method body goes here</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="op">};</span></a></code></pre></div>
+<figcaption>
+The new syntax leaves out the function keyword, saving you a bit of typing
+</figcaption>
+</figure>
+<figure>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">const</span> someThing <span class="op">=</span> <span class="st">&quot;hi&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">const</span> myObject <span class="op">=</span> <span class="op">{</span> someThing <span class="op">};</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">const</span> someThing <span class="op">=</span> <span class="st">&quot;hi&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">const</span> myObject <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">someThing</span><span class="op">:</span> someThing</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="op">};</span></a></code></pre></div>
+<figcaption>
+If you want to set a property on an object with the same name as a variable, you don’t have to repeat it. This syntax is used quite a lot in Vue.
+</figcaption>
+</figure>
+<h3 id="template-strings">Template strings</h3>
+<p>As in many programming languages, js allows you to write string literals either with <code>'single quotes'</code> or <code>&quot;double quotes&quot;</code>. ES6 adds backtics to the mix, with two important conveniences:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">let</span> expression <span class="op">=</span> <span class="st">&quot;javascript expressions&quot;</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">let</span> myString <span class="op">=</span> <span class="vs">`backticks can have </span><span class="sc">${</span>expression<span class="sc">}</span><span class="vs"> embedded in them`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">let</span> myLongString <span class="op">=</span> <span class="vs">`</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="vs">They</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="vs">also</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="vs">allow</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="vs">for</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="vs">new lines</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="vs">in the string</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="vs">`</span><span class="op">;</span></a></code></pre></div>
+<p>Throughout this tutorial, we will use double quotes for strings most of the times, single quotes when we need strings in html attributes (e.g. <code>&lt;img :src=&quot;'foobar.com/baz.jpg'&quot; /&gt;</code>), and backticks when we specifically want to use their new functionality.</p>
+<h3 id="lambda-functions">Lambda functions</h3>
+<pre><code>TODO</code></pre>
+<h3 id="destructuring">Destructuring</h3>
+<pre><code>TODO</code></pre>
+<h3 id="modules">Modules</h3>
+<pre><code>TODO</code></pre>
+<h3 id="final-remarks">Final remarks</h3>
+<p>There are a lot more new features that we haven’t touched, but these are the items that we will use extensively. The ‘evergreen’ browsers support most of these features out of the box, and later, we will see how to set up your project so that you can use almost any cutting edge feature while supporting older browsers too.</p>
+<h2 id="exercises">Exercises</h2>
+<pre><code>TODO: A few instructions on how to run the exercises</code></pre>
+<h2 id="first-experience">First Experience</h2>
+<p>One appealing feature of Vue is their focus on ‘scalability’. This word has many meanings, but here it means that Vue can be made suitable for the biggest complex projects and the smallest quick one-offs. Our first example will be on the simple end of this spectrum. All you need to do to start using Vue, is include one javascript file. You can get this from the official website, but to make things easier, it is also hosted at a public CDN, which you can just link to.</p>
+<p>Once you have this in place, you can create a new <em>Vue instance</em> with <code>new Vue()</code>. The options you pass here tell Vue what to do. You can point it to a DOM node where your Vue application will be rendered, give it a template, hook into life cycle events and more.</p>
+<p>Lets look at the first example of the Vue documentation page and deconstruct it together:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="kw">&lt;title&gt;</span>My first Vue app<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://unpkg.com/vue&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">  <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    {{ message }}</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">  <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">    <span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="at">Vue</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">      <span class="dt">el</span><span class="op">:</span> <span class="st">&quot;#app&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">      <span class="dt">data</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16">        <span class="dt">message</span><span class="op">:</span> <span class="st">&quot;Hello Vue!&quot;</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19">  <span class="kw">&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>You can find this example in the exercises in <code>exercices/02-simple-app/index.html</code>, and you can run it just by opening it with your browser. Lets look closer at what is happening in this example.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb11-1" data-line-number="1">  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://unpkg.com/vue&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Loads the latest version of vue into our page. <a href="https://unpkg.com/">unpkg</a> is a cdn that serves any library or package from npm as a plain javascript file. There are some downsides to this, but it is ideal for small projects and experimentation.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb12-1" data-line-number="1">  <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    {{ message }}</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>This is where we describe what vue should render for us. We have a container element with an id, so we can easily pass it to the Vue constructor later, and inside it a template for Vue to render. This minimal example uses <code>{{ }}</code> to render a javascript expression. Vue templates can do a lot more for you, and you can even choose to use other templating languages if you prefer. We will see a lot more of this soon.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" data-line-number="1">    <span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="at">Vue</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">      <span class="dt">el</span><span class="op">:</span> <span class="st">&quot;#app&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">      <span class="dt">data</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">        <span class="dt">message</span><span class="op">:</span> <span class="st">&quot;Hello Vue!&quot;</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>To conclude this example, we create the Vue instance that we keep talking about. We give it two options: <code>el</code> is a <em>css selector</em> that points to the container element we just looked at, and <code>data</code> contains all the data that we want Vue to keep track of and make available in the template. In this case, we just have one data property, <code>message</code>, which we use in the template. This reveals an important concept in Vue: there are specific ways to provide data to your template, the <code>data</code> property being the main one. To illustrate this point, if you instead had written</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" data-line-number="1">    <span class="kw">const</span> message <span class="op">=</span> <span class="st">&quot;Hello Vue!&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="at">Vue</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">      <span class="dt">el</span><span class="op">:</span> <span class="st">&quot;#app&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">      <span class="dt">data</span><span class="op">:</span> <span class="op">{</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">    <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Vue doesn’t understand you want to use that variable insider your template. As a result, the application would not render correctly, and you would see an error message in your dev tools console saying something like “vue.js:597 [Vue warn]: Property or method”message&quot; is not defined on the instance but referenced during render.“.</p>
+<p>Before we expand on this example, lets look at one more detail hiding behind that <code>data</code> property. If you open up the application (without the mistake) and open the dev tools console, you can check out what is in our <code>app</code>. You’ll find that <code>message</code> now is a property of the Vue instance. What’s more is, you can actually change it’s value and the template will be updated immediately to reflect the change! One of Vue’s core systems is it’s reactivity system. Vue will <em>watch</em> everything you define in the <code>data</code> property, keeps track of where you use those properties, and runs updates when it detects a change. The reactivity system is really important, but may also seem a little bit magical. We will take a deeper look into how things work under the hood. This will help you leverage reactivity, and show you some of the pitfals to avoid.</p>
+<figure>
+  <img src="static/read-app.message.png">
+  <img src="static/write-app.message.png">
+  <figcaption markdown>We can access the `message` data property in the console, and even update it.</figcaption>
+</figure>
+<h3 id="more-features">More features</h3>
+<p>In the next section we will gradually expand on the example we started with, to look at some of the other features Vue provides. Lets say we are building a twitter client, and we want the user to write a message themselves, and send it if <code>message.length &gt; 0</code> and <code>message.length &lt; 255</code>. The first thing we can do is to expand on our template. Based on what we have seen already, we could write something like:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" data-line-number="1">  <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">    <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;POST&quot;</span><span class="ot"> action=</span><span class="st">&quot;/messages&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">      <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;message-input&quot;</span><span class="kw">&gt;</span>Message:<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">      <span class="kw">&lt;textarea</span><span class="ot"> id=</span><span class="st">&quot;message-input&quot;</span><span class="ot"> name=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;</span>{{ message }}<span class="kw">&lt;/textarea&gt;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">      <span class="kw">&lt;footer&gt;</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">        <span class="kw">&lt;span&gt;</span>{{ message.length }}/255<span class="kw">&lt;/span&gt;</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">        <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">      <span class="kw">&lt;/footer&gt;</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">    <span class="kw">&lt;/form&gt;</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">  <span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>This will correctly display the message we set in the <code>data</code> property, and show the correct length. But it starts to break down when you try to edit the message &amp;emdash; the length doesn’t change. What’s going on? If Vue is so reactive, shouldn’t it be able to detect this change for you? The problem is how we render the message. We used <code>{{ message }}</code>, but these curly braces can only be used to display data, not to make it interactive. When you edit the text in the textarea, it doesn’t actually change the value of <code>message</code>.</p>
+<figure>
+  <img src="static/unbound-edit.png">
+  <figcaption>Editing the text in the textarea does not automatically change the value of `message`</figcaption>
+</figure>
+<h4 id="directives">Directives</h4>
+<p>To fix this, we could hook into <code>onchange</code> or <code>oninput</code> events, update the <code>data.message</code> property ourselves and have Vue rerender the template, but this pattern is so common that Vue has a built-in solution for this. Vue lets you augument elements in your template using <em>directives</em>, a concept introduced by AngularJS. Vue provides several directives such as <code>v-if</code> and <code>v-for</code>, which you can add as HTML attributes to manipulate the behavior of an element. The one that we want to use here is the <code>v-model</code> attribute:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb16-1" data-line-number="1">      <span class="kw">&lt;textarea</span><span class="ot"> id=</span><span class="st">&quot;message-input&quot;</span><span class="ot"> name=</span><span class="st">&quot;message&quot;</span><span class="ot"> v-model=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;&lt;/textarea&gt;</span></a></code></pre></div>
+<p>This creates a two-way binding between the <code>data.message</code> property and the value of the textarea element. Now, when we type in the textarea, Vue will automatically update the value of <code>data.message</code> and then update the character counter in the template.</p>
+<p>Next, let’s work on preventing the user to send the message when it isn’t valid. HTML already has a way to disable ui elemnts, through the <code>disabled</code> attributes, and it would be nice if we could leverage that. In other words, when the value of <code>data.message</code> is a valid message, we want to render <code>&lt;button type=&quot;submit&quot; disabled=&quot;false&quot;&gt;</code> and render <code>&lt;button type=&quot;submit&quot; disabled=&quot;true&quot;&gt;</code> when the value is invalid. One way we can achieve this is with the <code>v-if</code> directive we just mentioned:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb17-1" data-line-number="1">  <span class="kw">&lt;button</span><span class="ot"> v-if=</span><span class="st">&quot;message.length == 0 || message.length &gt; 255&quot;</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> disabled=</span><span class="st">&quot;true&quot;</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="kw">&lt;button</span><span class="ot"> v-else type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> disabled=</span><span class="st">&quot;false&quot;</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></a></code></pre></div>
+<p>This works, but is a bit clunky. And with more states or attributes, this will only become worse. What we really want is to dynamically set the value of the attribute. You might try <code>&lt;button type=&quot;submit&quot; disabled=&quot;{{ ... }}&quot;&gt;</code>, but this won’t work; Vue doesn’t pick up double brace expressions in HTML attributes. Instead, Vue provides you with the <code>v-bind</code> directive, which you can use as follows:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb18-1" data-line-number="1">  <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> v-bind:disabled=</span><span class="st">&quot;message.length == 0 || message.length &gt; 255&quot;</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></a></code></pre></div>
+<p>This shows that there are actually multiple ways to provide arguments to a directive: the <code>v-bind</code> directive takes an attribute name that you want to bind to, and a JavaScript expression as its value. Later we’ll also see directives that take <em>modifiers</em>. Binding expressions to attributes is so common, that Vue allows you to abbreviate <code>v-bind:</code> to just <code>:</code>, so we can write <code>&lt;button :disabled=&quot;...&quot;&gt;</code> instead.</p>
+<h4 id="computed">Computed</h4>
+<p>Next, we will render a warning when the message is invalid. This makes the interface much clearer for users <em>and</em> it forces us to adress a problem in our template. We could show/hide the warning with <code>v-if</code>, and just copy the expression we bound to the <code>disabled</code> attribute for our button. But if we’re honest, it already doesn’t feel great to write such a long expression in our template. Copy-pasting it would make our template much worse.</p>
+<p>Enter the <code>computed</code> property. With <code>computed</code>, you can provide your application with information that is derived from other information. For example, instead of writing <code>message.length == 0 || message.length &gt; 255</code> directly in our template, we can create a computed property <code>isInvalid</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" data-line-number="1">    <span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="at">Vue</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">      <span class="dt">el</span><span class="op">:</span> <span class="st">&quot;#app&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">      <span class="dt">data</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">        <span class="dt">message</span><span class="op">:</span> <span class="st">&quot;Hello Vue!&quot;</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">      <span class="op">},</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">      <span class="dt">computed</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">        <span class="at">isInvalid</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">          <span class="cf">return</span> <span class="kw">this</span>.<span class="va">message</span>.<span class="at">length</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">||</span> <span class="kw">this</span>.<span class="va">message</span>.<span class="at">length</span> <span class="op">&gt;</span> <span class="dv">255</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">    <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>And then use it in our template like so:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb20-1" data-line-number="1">  <span class="kw">&lt;footer&gt;</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">    <span class="kw">&lt;p</span><span class="ot"> v-if=</span><span class="st">&quot;isInvalid&quot;</span><span class="ot"> class=</span><span class="st">&quot;warning-message&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">      The current message is either too long or too short.</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">    <span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    <span class="kw">&lt;span&gt;</span>{{ message.length }}/255<span class="kw">&lt;/span&gt;</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">    <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> :disabled=</span><span class="st">&quot;isInvalid&quot;</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">  <span class="kw">&lt;/footer&gt;</span></a></code></pre></div>
+<p>Computed properties are really useful. They are reactive, make your templates clearer, help organize your code, make it easier to write automated tests, and are very efficient to boot. Vue does a good job of detecting data dependencies, so a computed property is only recomputed when neccesary. In our case, <code>isInvalid</code> will be updated when the value of <code>data.message</code> changes. But if we had another data property, say <code>data.username</code>, we could change it all day without triggering a recalculation of <code>isInvalid</code>. The only constraints on computed properties, is that they are <em>read-only</em>, and that they should be <em>pure functions</em>.</p>
+<h4 id="methods-and-events">Methods and events</h4>
+<p>Before we close this section off, there are two more major features we should look at: methods and events. Just like <code>computed</code> and <code>data</code>, you can provide a <code>methods</code> property to the Vue constructor, making its contents available to your template and the rest of your Vue application. But instead of (computed) data, you are now providing methods, which you can call from your template. An example usecase is formatting monetary values. Lets say your app has several data properties containing money and you store them internally as integers. You could then use a method to present those integers as correctly formatted strings.</p>
+<figure>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" data-line-number="1">  <span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="at">Vue</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">    <span class="dt">data</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">      <span class="dt">price</span><span class="op">:</span> <span class="dv">11200</span> <span class="co">// 112 dollar and 00 cents.</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">    <span class="dt">methods</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">      <span class="at">formatMoney</span>(cents) <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">        <span class="kw">const</span> dollars <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(cents)<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">        <span class="kw">let</span> remainingCents <span class="op">=</span> cents <span class="op">%</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9">        remainingCents <span class="op">=</span> <span class="va">remainingCents</span>.<span class="at">toString</span>().<span class="at">padEnd</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11">        <span class="cf">return</span> <span class="vs">`$ </span><span class="sc">${</span>dollars<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span>remainingCents<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb21-14" data-line-number="14">  <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb22-1" data-line-number="1">  <span class="kw">&lt;span&gt;</span>{{ formatMoney(price) }}<span class="kw">&lt;/span&gt;</span></a></code></pre></div>
+</figure>
+<p>The most common usecase for methods though, is to handle events. In almost any application, you will want to listen to DOM events. Maybe you want to react to users clicking an element or moving their mouse, or maybe you want to run some custom behavior when an input is changed, or a form is submitted. Vue lets you do this declaratively with the <code>v-on</code> directive. Its full syntax is <code>v-on:eventname.modifier=&quot;expression or method&quot;</code>. For example, we can add a button to our example to clear the form like so:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb23-1" data-line-number="1">  <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> v-on:click=</span><span class="st">&quot;message = &#39;&#39;&quot;</span><span class="kw">&gt;</span>Clear<span class="kw">&lt;/button&gt;</span></a></code></pre></div>
+<p>In this case, we add an event listener for the <code>click</code> event, and set <code>message</code> to an empty string when it is triggered. Usually though, you pass the name of a method, which will run when the event is triggered. We could for example catch the <code>submit</code> event on the form, and send a POST request ourselves. This way, we can prevent the page from reloading, which creates a nicer user experience. We just have to add the event handler to our template:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb24-1" data-line-number="1">  <span class="kw">&lt;form</span><span class="ot"> v-on:submit=</span><span class="st">&quot;handleSubmit&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>And then create a method for it:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" data-line-number="1">  <span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="at">Vue</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">    <span class="co">/* ... */</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="dt">methods</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">      <span class="at">handleSubmit</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">        <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span> <span class="co">// This prevents the page reload</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">        <span class="co">// You could use XmlHttpRequest, the Fetch API or a library like axios to send the data.</span></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">        <span class="va">window</span>.<span class="at">fetch</span>(<span class="st">&quot;/messages&quot;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;POST&quot;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">          .<span class="at">then</span>(response <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">            <span class="co">// The POST was succesful, so we can reset the form.</span></a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">            <span class="kw">this</span>.<span class="at">message</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-12" data-line-number="12">          <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-13" data-line-number="13">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb25-15" data-line-number="15">  <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>As with <code>v-bind</code>, Vue provides some shortcuts to make your templates and event handlers a little more concise. Instead of <code>v-on:submit</code> you can write <code>@submit</code>. Vue also defines <em>modifiers</em> that help you keep your event handlers clean. In our example, instead of having the <code>event.preventDefault();</code> in the handler, we could write <code>@submit.prevent=&quot;handleSubmit&quot;</code> in the template. Vue provides dozens more of these modifiers, which are especially great for keyboard events. Writing <code>@keyup.ctrl.shift.s=&quot;saveAll&quot;</code> saves you a lot of keyboard event checking code in the event handler, and makes your code more declarative too.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>TODO</p>
+<h2 id="a-broader-look">A broader look</h2>
+<p>Earlier we said that Vue scales well to different project sizes. We have seen how we can use Vue in a very small project, and looked at some of the core functionalities that Vue delivers out of the box. We will now take a step back, to look at the ecosystem around Vue, and how we would go about using Vue in more realistic scenarios.</p>
+<p>There are several things that you will usually need to deal with as your application grows in size, such as routing, project structure, state management and testing. This is where you can best tell the difference between a library and framerwork. Where frameworks like Angular solve several of these out of the box, a library like React leaves you to your own devices, or to community-provided solutions. Vue chooses a middle road: there are official solutions to state management, routing and testing, in the form of <code>Vuex</code>, <code>Vue Router</code> and <code>vue-test-utils</code>, but they are packaged separately. They are developed by the <em>core Vue team</em>, which maintains the official ecosystem around Vue. This also includes a chrome devtools extension, serverside rendering support, a static site generator, and support for typescript, webpack, rollup and other toolchains.</p>
+<p>Having official solutions for these is <em>great</em>. It saves you a lot of time figuring out build pipelines, gives you the confidence that things will work well together, and the documentation for these official packages is (un)usually great. Besides these official projects, there is also an active and growing community scene around Vue.</p>
+<h3 id="gearing-up">Gearing up</h3>
+<p>So lets see how we would set up Vue for a bigger project, using the Vue CLI. First, you need to make sure you have Node and NPM installed on your machine. Then you will want to install the CLI tool, by running <code>npm install -g @vue/cli</code>. When this is done, you are ready to set up a new Vue project. Navigate to the folder where you want to set up your project (which will have it’s own directory) and then run <code>vue create project-name</code>. The CLI will create the folder for you, and then asks you questions on how you want to set your project up. The first prompt asks if you want to choose a predefined template, or if you want to manually select features. If you go for the last option, you get to choose from a whole list of features, including Typescript and css preprocessor support. Depending on which features you choose here, you may be prompted to make more specific choices: which css preprocessor? Which linter settings?</p>
+<p>For now, lets only choose the Vue Router. Before we are done, the CLI asks us where we want to store these settings (in a separate file) and if we want to save this configuration as a preset for the next time you create a Vue project (no). The Vue CLI then starts generating a boilerplate application structure and installs the neccesary dependencies. When it is done installing, the result is a modern, fully featured front-end development environment. It comes with a few npm scripts, most importantly a <code>build</code> script and a <code>serve</code> script. Running the last one (<code>npm run serve</code>) starts a Webpack development server with hot reloading.</p>
+</body>
+</html>

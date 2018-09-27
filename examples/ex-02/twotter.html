@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twotter</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <form>
+      <textarea name="message">{{ message }}</textarea>
+      <footer>
+        <span>{{ message.length }}/255</span>
+        <button type="submit">Send</button>
+      </footer>
+    </form>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue!"
+      }
+    });
+  </script>
+</body>
+</html>
