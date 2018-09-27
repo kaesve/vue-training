@@ -60,9 +60,15 @@ img {
 <section class="slide" markdown>
 ## Prep
 
+### Links
+
 * Repository: [https://github.com/kaesve/vue-training.git](https://github.com/kaesve/vue-training.git)
 * Documentation: [https://vuejs.org](https://vuejs.org)
 * Cheatsheet: [https://vuejs-tips.github.io/cheatsheet/](https://vuejs-tips.github.io/cheatsheet/) [https://www.vuemastery.com/vue-cheat-sheet/](https://www.vuemastery.com/vue-cheat-sheet/)
+
+### Run
+
+* `npm install -g @vue/cli`
 
 </section>
 
@@ -406,6 +412,19 @@ const { name, age, jobTitle } = person;
 ## Example time
 
 <img src="static/twotter-logo.png">
+
+</section>
+
+
+<section class="slide" markdown>
+
+## Twotter back-end
+
+```
+> cd server
+> npm install
+> node index.js
+```
 
 </section>
 
