@@ -14,7 +14,7 @@
         </p>
     
         <span>{{ message.length }}/255</span>
-        <button type="button" :disabled="message.length" @click="message = ''">
+        <button type="button" :disabled="message.length == 0" @click="message = ''">
           Clear
         </button>
         <button type="submit" :disabled="isInvalid">Send</button>
