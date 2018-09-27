@@ -38,7 +38,7 @@ twotterersRoute.get("/", (req, res) => res.json(twotterers));
 twotterersRoute.get("/:id", (req, res) => {
   let twotterer = byId(twotterers, req.params.id);
   if (twotterer) {
-    twotterer = Object.assign({}, twotterer, { posts: posts.filter(p => p.author == twotterer.id) });
+    twotterer = Object.assign({}, twotterer, { twots: twots.filter(p => p.author == twotterer.id) });
     res.json(twotterer);
   }
   else res.status(NOT_FOUND).json();
@@ -59,7 +59,7 @@ const validateNewTwot = twot => {
   else if (twot.message.length > 255) violations.message.push("Message is too long.");
 
   if (!twot.author) violations.author.push("No author provided.");
-  else if (!byId(users, twot.author)) violations.author.push("Author invalid or unknown");
+  else if (!byId(twotterers, twot.author)) violations.author.push("Author invalid or unknown");
 
   const violationCount = violations.message.length
     + violations.author.length;
@@ -83,7 +83,7 @@ const validateTwotUpdate = twot => {
   if (!Array.isArray(twot.likes)) violations.likes.push("Invalid or missing likes");
   else {
     violations.likes.forEach(like => {
-      if (!byId(users, like)) violations.likes.push(`Cannot find user with provided id "${like}"`);
+      if (!byId(twotterers, like)) violations.likes.push(`Cannot find user with provided id "${like}"`);
     });
   }
 
