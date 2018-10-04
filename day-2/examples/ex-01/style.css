@@ -1,0 +1,50 @@
+* { padding: 0; margin: 0; border: 0; background: none; box-sizing: border-box; }
+
+
+button {
+  padding: 7.5px 10px;
+  background: blue;
+  color: white;
+  font-weight: bold;
+}
+
+.modal-layer {
+  position: fixed;
+  top: 0; left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-container {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-close-control {
+  color: gray;
+  background: none;
+}
+.modal-close-control:before {
+  content: "x"
+}
+
+
+
+#app {
+  display: flex;
+  min-width: 100vw;
+  padding-top: 100px;
+
+  justify-content: center;
+}

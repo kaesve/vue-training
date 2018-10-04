@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue Modal</title>
+  <script src="vue.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <button type="button" @click="openModal">Klik voor meer informatie</button>
+    
+    <modal v-if="showModal" @close="closeModal" title="Meer informatie">
+      <p>1101101 1100101 1100101 1110010 100000 1101001 1101110 1100110 1101111 1110010 1101101 1100001 1110100 1101001 1100101</p>
+    </modal>
+  </div>
+
+  <script>
+    const Modal = {
+      
+      props: [ "title" ],
+      template: `
+
+      <div class="modal-layer" @click.self="close">
+        <div class="modal-container">
+          <header class="modal-header">
+            <slot name="title">
+              <h1 class="modal-heading">
+                {{ title }}
+              </h1>
+            </slot>
+            <button class="modal-close-control" @click="close" />
+          </header>
+          <slot />
+        </div>
+      </div>
+
+      `,
+      data() {
+        return { isOpen: false };
+      },
+      methods: {
+        close() { this.$emit("close"); }
+      }
+    };
+
+
+    const app = new Vue({
+      el: "#app",
+      components: { Modal },
+      data: {
+        showModal: false,
+      },
+      methods: {
+         closeModal() { this.showModal = false; },
+          openModal() { this.showModal =  true; },
+        toggleModal() { this.showModal = !this.showModal; }
+      }
+    });
+  </script>
+</body>
+</html>

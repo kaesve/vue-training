@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="vue.js"></script>
+  <script src="axios.js"></script>
+
+  <script src="modal.js"></script>
+</head>
+<body>
+  <div id="app" class="hidden">
+    <div class="twot-list">
+      <twot-card v-for="twot in twotList" :key="twot.id"
+        :twot="twot"
+        @click.native="selectedTwotterer = twot.author">
+    </div>
+
+    <modal v-if="selectedTwotterer" @close="selectedTwotterer = null">
+      <twotterer-profile :twotterer-id="selectedTwotterer" />
+    </modal>
+
+  </div>
+
+  <script>
+
+const TwotCard = {
+  props: [ "twot" ],
+  template: `
+  <article class="twot-card">
+    <pre class="twot-card-message">{{ twot.message }}</pre>
+    <footer class="twot-card-footer">
+      <span class="twot-like-counter">
+        ❤ {{ twot.likes.length }}
+      </span>
+    </footer>
+  </article>`
+};
+
+const TwottererProfile = {
+  props: [ 'twottererId' ],
+  components: { TwotCard },
+  created() {
+    // Fetch the data here
+    axios.get("http://localhost:8888/twotterers/" + this.twottererId)
+      .then(response => {
+        this.isLoading = false;
+        this.twotterer = response.data;
+      })
+      .catch(() => this.isLoading = false);
+  },
+  data() {
+    return {
+      isLoading: true,
+      twotterer: null
+    };
+  },
+  computed: {
+    likes() {
+      let count = 0;
+      if (this.twotterer) {
+        this.twotterer.twots.forEach(twot => count += twot.likes.length);
+      }
+
+      return count;
+    }
+  },
+  template: `
+  <div class="twotterer-profile-container">
+    <div class="loader-container" v-if="isLoading">
+      <span>Loading</span>
+    </div>
+    <div class="error-message" v-else-if="! twotterer">
+      <p>
+        Could not load this profile.
+      </p>
+    </div>
+    <template v-else>
+      <header class="twotterer-profile-header">
+        {{ twotterer.username }} <span class="twotterer-profile-likes-badge">❤ {{ likes }}</span>
+      </header>
+      <div class="twot-list">
+        <twot-card v-for="twot in twotterer.twots" :key="twot.id" :twot="twot" />
+      </div>
+
+    </template>
+  </div>
+  `
+};
+
+
+
+let app;
+let appContainer = document.getElementById("app");
+
+console.log("hey");
+axios.get("http://localhost:8888/twots")
+  .then(response => {
+    appContainer.classList.remove("hidden");
+    app = new Vue({
+      components: { Modal, TwottererProfile, TwotCard },
+      data: {
+        selectedTwotterer: null,
+        twotList: response.data
+      }
+    });
+    app.$mount(appContainer);
+  });
+  </script>
+</body>
+</html>

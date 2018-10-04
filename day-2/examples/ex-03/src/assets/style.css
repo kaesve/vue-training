@@ -1,0 +1,74 @@
+* { padding: 0; margin: 0; border: 0; background: none; box-sizing: border-box; }
+
+
+button {
+  padding: 7.5px 10px;
+  background: blue;
+  color: white;
+  font-weight: bold;
+}
+
+.modal-layer {
+  position: fixed;
+  top: 0; left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-container {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  max-height: 80vh;
+  max-width: 80vw;
+  min-width: 340px;
+
+  overflow: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-close-control {
+  color: gray;
+  background: none;
+}
+.modal-close-control:before {
+  content: "x"
+}
+
+
+
+#app {
+  display: flex;
+  width: 100%;
+  background: #eef;
+
+  justify-content: center;
+}
+
+.twot-card {
+  list-style: none;
+  width: 300px;
+  padding: 10px;
+  margin: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  transition: all 0.5s;
+}
+
+.twot-card:hover {
+  border-color: #bde;
+  box-shadow: 0 0 20px -4px #bdf;
+}
+
+.twot-card-message {
+  white-space: pre-wrap;
+  margin-bottom: 7.5px;
+}

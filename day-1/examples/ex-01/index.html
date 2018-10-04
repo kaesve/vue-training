@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component foo="" />
+  </div>
+
+  <script>
+    const MyComponent = {
+      
+      props: {
+        foo: {
+          type: String,
+          required: true,
+        }
+      },
+      template: `
+
+      <span> hello</span>
+
+      `,
+      data() {
+        return { message: "Hello Vue!" }
+      },
+      computed: {
+        doubleMessage() {
+          return this.message + this.message;
+        }
+      }
+    }
+
+
+    const app = new Vue({
+      el: "#app",
+      components: { MyComponent }
+    });
+  </script>
+</body>
+</html>

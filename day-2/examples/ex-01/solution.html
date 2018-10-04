@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue Modal</title>
+  <script src="vue.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <button type="button" @click="openModal">Klik voor meer informatie</button>
+    
+    <modal v-if="showModal" @close="closeModal" title="Meer informatie">
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros orci, bibendum quis blandit et, mollis vitae velit. Phasellus aliquet urna lacus, ut aliquam lacus tempus et. Aliquam metus ex, tempus eget volutpat ut, imperdiet ac arcu. Etiam vitae justo ac justo bibendum pretium ullamcorper at velit. Suspendisse lobortis condimentum magna. Nulla facilisi. Maecenas elementum finibus ante, in euismod felis. Vivamus accumsan nunc tortor, lacinia vulputate massa maximus non. Nulla ullamcorper quam justo, sit amet cursus nibh scelerisque sed. Aenean sed pharetra odio.
+      </p>
+    </modal>
+  </div>
+
+  <script>
+    const Modal = {
+      
+      props: [ "title" ],
+      created() {
+        window.addEventListener("keyup", this.handleKeyUp);
+      },
+      destroyed() {
+        window.removeEventListener("keyup", this.handleKeyUp);
+      },
+      template: `
+
+      <div class="modal-layer" @click.self="close">
+        <div class="modal-container">
+          <header class="modal-header">
+            <slot name="title">
+              <h1 class="modal-heading">
+                {{ title }}
+              </h1>
+            </slot>
+            <button class="modal-close-control" @click="close" />
+          </header>
+          <slot />
+        </div>
+      </div>
+
+      `,
+      data() {
+        return { isOpen: false };
+      },
+      methods: {
+        close() { this.$emit("close"); },
+        handleKeyUp(event) {
+          if (event.key == "Escape") {
+            this.$emit("close");
+          }
+        }
+      }
+    };
+
+
+    const app = new Vue({
+      el: "#app",
+      components: { Modal },
+      data: {
+        showModal: false,
+      },
+      methods: {
+         closeModal() { this.showModal = false; },
+          openModal() { this.showModal =  true; },
+        toggleModal() { this.showModal = !this.showModal; }
+      }
+    });
+  </script>
+</body>
+</html>
